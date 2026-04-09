@@ -12,12 +12,14 @@ const char *vertexShaderSource = R"glsl(
     layout (location = 0) in vec3 aPos;   // Attribute 0 will be the Position (X, Y, Z)
     layout (location = 1) in vec3 aColor; // Attribute 1 will be the Color (R, G, B)
 
+    uniform mat4 u_MVP;
+
     out vec3 vertexColor; // Output variable to pass the color to the Fragment Shader
 
     void main() {
         // gl_Position is a native OpenGL variable that tells WHERE the vertex is on the screen.
         // The fourth component (1.0) is "W", used for projection and perspective math (we will see later).
-        gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+        gl_Position = u_MVP * vec4(aPos, 1.0);
         vertexColor = aColor; // Forwards the color
     }
 )glsl";
