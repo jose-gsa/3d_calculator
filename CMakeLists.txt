@@ -7,8 +7,9 @@ set(CMAKE_CXX_STANDARD 17)
 # Include header directories
 include_directories(include deps/glad/include)
 
-# Find GLFW installed on the system
+# Find GLFW and GLM installed on the system
 find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
 
 # Add GLAD source code (needs to be compiled together)
 add_executable(${PROJECT_NAME} 
@@ -18,4 +19,4 @@ add_executable(${PROJECT_NAME}
 )
 
 # Link with necessary libraries
-target_link_libraries(${PROJECT_NAME} glfw GL dl)
+target_link_libraries(${PROJECT_NAME} glfw GL dl glm::glm)
